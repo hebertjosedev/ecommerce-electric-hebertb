@@ -1,0 +1,11 @@
+/*Estilos para el carrito de compras*/
+
+.fa-shopping-cart {
+  font-size: 27px;
+  cursor: pointer;
+}
+
+.fa-shopping-cart:hover {
+  transform: rotate(-15deg);
+  border-bottom: 1px solid #ffffff;
+}
