@@ -1,6 +1,6 @@
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./Nav.css";
-import Logo from "./logo-marca.svg";
+import Logo from "./smart-electric-logo-oscuro.png";
 import CartWidget from "../CartWidget/CartWidget";
 
 function NavBar() {

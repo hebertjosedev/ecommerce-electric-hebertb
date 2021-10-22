@@ -13,8 +13,13 @@
   color: #ffffff;
 }
 
-.nav img {
-  width: 100px;
+.img-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.img-logo img {
+  width: 200px;
 }
 
 .input-busqueda {
