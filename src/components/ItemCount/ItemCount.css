@@ -1,0 +1,21 @@
+.contenedor-contador {
+  text-align: center;
+  margin-top: 200px;
+  font-size: 20px;
+}
+
+.contenedor-contador button:first-child {
+  background-color: green;
+  color: white;
+}
+
+.contenedor-contador button:nth-child(3) {
+  background-color: red;
+  color: white;
+  margin-right: 10px;
+}
+
+.botones-contador {
+  padding: 20px;
+  font-size: 20px;
+}
