@@ -10,7 +10,7 @@ function App() {
       </header>
       <main className="main">
         <section>
-          <ItemListContainer saludo="Hola, sin stock por ahora :(" />
+          <ItemListContainer />
         </section>
       </main>
     </div>

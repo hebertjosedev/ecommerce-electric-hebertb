@@ -1,11 +1,11 @@
 import React from "react";
 import "./ItemListContainer.css";
-import ItemCount from "../ItemCount/ItemCount";
+import ProductsList from "../ProductsList/ProductsList";
 
-function ItemListContainer({ saludo }) {
+function ItemListContainer() {
   return (
     <div>
-      <ItemCount initial={1} stock={5} />
+      <ProductsList />
     </div>
   );
 }
