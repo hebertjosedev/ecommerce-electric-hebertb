@@ -6,16 +6,27 @@ import ItemDetail from "../ItemDetail/ItemDetail";
 
 const ItemDetailContainer = () => {
   const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     PeticionDeProductos.then((res) => {
       setProductos(res); //aca nos devuelve un array del stock de productos
-    }).catch((err) => console.log(err));
+    })
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
     <>
-      <ItemDetail productos={productos} />
+      {loading ? (
+        <div className="loading">
+          <h1>
+            <i class="fas fa-spinner"></i>
+          </h1>
+        </div>
+      ) : (
+        <ItemDetail productos={productos} />
+      )}
     </>
   );
 };
