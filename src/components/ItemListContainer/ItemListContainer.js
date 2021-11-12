@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import ItemCount from "../ItemCount/ItemCount";
 import ItemList from "../ItemList/ItemList";
 import { PeticionDeProductos } from "../services/peticionDeProductos";
@@ -8,13 +9,23 @@ function ItemListContainer() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const { producto } = useParams();
+
   useEffect(() => {
-    PeticionDeProductos.then((res) => {
-      setProducts(res); //aca nos devuelve un array del stock de productos
-    })
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
-  }, [products]);
+    if (producto) {
+      PeticionDeProductos.then((res) => {
+        setProducts(res.filter((prod) => prod.producto === producto)); //aca nos devuelve un array del stock de productos
+      })
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
+    } else {
+      PeticionDeProductos.then((res) => {
+        setProducts(res); //aca nos devuelve un array del stock de productos
+      })
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
+    }
+  }, [producto]);
   return (
     <div>
       {loading ? (
@@ -28,7 +39,6 @@ function ItemListContainer() {
           <div className="contenedor-card">
             <ItemList products={products} />
           </div>
-          <ItemCount initial={1} stock={5} />
         </div>
       )}
     </div>

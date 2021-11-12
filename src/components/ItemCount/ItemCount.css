@@ -1,6 +1,7 @@
 .contenedor-contador {
-  text-align: center;
-  margin-top: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 20px;
 }
 
@@ -9,13 +10,19 @@
   color: white;
 }
 
-.contenedor-contador button:nth-child(3) {
-  background-color: red;
-  color: white;
+.contenedor-contador button {
   margin-right: 10px;
 }
 
+.contenedor-contador button:nth-child(3) {
+  background-color: red;
+  margin-left: 10px;
+  color: white;
+}
+
 .botones-contador {
-  padding: 20px;
+  padding: 10px;
   font-size: 20px;
+  font-weight: 800;
+  border-radius: 10px;
 }

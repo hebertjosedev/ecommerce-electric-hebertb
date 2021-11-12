@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { PeticionDeProductos } from "../services/peticionDeProductos";
 import ItemDetail from "../ItemDetail/ItemDetail";
+import { useParams } from "react-router-dom";
 
 const ItemDetailContainer = () => {
   const [productos, setProductos] = useState([]);
@@ -14,7 +15,7 @@ const ItemDetailContainer = () => {
     })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
-  }, []);
+  }, [productos]);
 
   return (
     <>

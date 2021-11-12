@@ -1,32 +1,3 @@
-*,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.app {
-  display: grid;
-  grid-template-columns: 264px repeat(3, 1fr);
-  grid-template-rows: repeat(3, auto);
-  grid-template-areas: "header main main main";
-  position: relative;
-}
-
-.header {
-  grid-area: header;
-  position: fixed;
-}
-
-.menu-mobile {
-  display: block;
-}
-
-.main {
-  grid-area: main;
-}
-
 .menu-hamburguesa {
   display: none;
   justify-content: space-between;

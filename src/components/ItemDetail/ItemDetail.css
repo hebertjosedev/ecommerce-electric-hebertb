@@ -1,11 +1,9 @@
 .contenedor-producto-detalle {
   display: flex;
   justify-content: space-evenly;
-  flex-wrap: wrap;
   align-items: center;
-  border: 2px solid red;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 .contenedor-imagen {
@@ -31,18 +29,21 @@
   margin-bottom: 10px;
 }
 
-.boton-comprar {
-  text-align: center;
+@media (max-width: 576px) {
+  .contenedor-imagen {
+    height: auto;
+  }
+
+  .contenedor-imagen img {
+    width: 300px;
+  }
+
+  .contenedor-descripcion {
+    border: none;
+  }
 }
 
-.boton-comprar button {
-  width: 100%;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  padding: 10px;
-}
-
-@media (min-width: 768px) {
+@media (max-width: 1140px) {
   .contenedor-producto-detalle {
     flex-direction: column;
   }

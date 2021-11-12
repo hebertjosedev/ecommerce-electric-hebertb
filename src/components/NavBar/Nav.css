@@ -7,6 +7,7 @@
   display: flex;
   flex-flow: column nowrap;
   margin-left: 20px;
+  width: 100%;
   height: 100vh;
   justify-content: space-around;
   background-color: #222222;
@@ -75,4 +76,8 @@ input[type="search"]:focus {
 
 .navbar li:hover {
   border-left: 2px solid #ffffff;
+}
+
+.cart-products a {
+  color: white;
 }
