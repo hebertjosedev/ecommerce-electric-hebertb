@@ -30,6 +30,9 @@ function App() {
               <Route exact path="/detalle/:nombre">
                 <ItemDetailContainer />
               </Route>
+              <Route exact path="/cart">
+                <CartProducts />
+              </Route>
             </Switch>
           </section>
         </main>

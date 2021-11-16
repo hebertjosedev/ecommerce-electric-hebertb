@@ -3,7 +3,7 @@ import React from "react";
 const CartProducts = () => {
   return (
     <>
-      <h1>Hola soy el contenedor de productos</h1>
+      <h1>Has agregado al carrito los siguientes productos</h1>
     </>
   );
 };

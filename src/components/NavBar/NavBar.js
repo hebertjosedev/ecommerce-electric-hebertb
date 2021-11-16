@@ -2,7 +2,7 @@
 import "./Nav.css";
 import Logo from "./smart-electric-logo-oscuro.png";
 import CartWidget from "../CartWidget/CartWidget";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   return (

@@ -7,8 +7,6 @@ import ItemCount from "../ItemCount/ItemCount";
 
 const ItemDetail = ({ productos }) => {
   const { nombre } = useParams();
-  console.log(nombre);
-  console.log(productos);
   return (
     <>
       {productos.map((producto) =>
@@ -35,7 +33,11 @@ const ItemDetail = ({ productos }) => {
                 <span>({producto.stock} disponibles)</span>
               </div>
               <div className="boton-comprar">
-                <ItemCount initial={1} stock={producto.stock} />
+                <ItemCount
+                  initial={1}
+                  stock={producto.stock}
+                  producto={producto.nombre}
+                />
               </div>
             </div>
           </div>
