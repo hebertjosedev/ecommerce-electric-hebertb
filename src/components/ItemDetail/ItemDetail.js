@@ -1,11 +1,17 @@
 //Aqui va la vista del detalle de cada producto}
 
-import React from "react";
+import React, { useState } from "react";
 import "./ItemDetail.css";
 import { useParams } from "react-router-dom";
 import ItemCount from "../ItemCount/ItemCount";
+import { Link } from "react-router-dom";
 
 const ItemDetail = ({ productos }) => {
+  const handleAdd = (cantidad) => {
+    console.log(cantidad);
+    setClick(true);
+  };
+  const [click, setClick] = useState(false);
   const { nombre } = useParams();
   return (
     <>
@@ -33,11 +39,18 @@ const ItemDetail = ({ productos }) => {
                 <span>({producto.stock} disponibles)</span>
               </div>
               <div className="boton-comprar">
-                <ItemCount
-                  initial={1}
-                  stock={producto.stock}
-                  producto={producto.nombre}
-                />
+                {click === true ? (
+                  <Link to={"/cart"}>
+                    <button className="boton-cart">ir al carrito</button>
+                  </Link>
+                ) : (
+                  <ItemCount
+                    initial={1}
+                    stock={producto.stock}
+                    producto={producto.nombre}
+                    onAdd={handleAdd}
+                  />
+                )}
               </div>
             </div>
           </div>

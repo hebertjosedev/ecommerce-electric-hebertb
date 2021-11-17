@@ -20,10 +20,20 @@
   color: white;
 }
 
-.botones-contador {
+.botones-contador,
+.boton-cart {
   padding: 10px;
   font-size: 20px;
   font-weight: 800;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.boton-cart {
+  background-color: rgb(3, 172, 3);
+  color: white;
+}
+
+.boton-cart:hover {
+  color: rgba(255, 255, 255, 0.856);
 }
