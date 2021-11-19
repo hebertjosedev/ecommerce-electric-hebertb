@@ -23,7 +23,10 @@ function ItemCount({ stock, initial, onAdd }) {
         <button className="botones-contador menos" onClick={resItem}>
           -
         </button>
-        <button className="botones-contador agregar" onClick={onAdd}>
+        <button
+          className="botones-contador agregar"
+          onClick={() => onAdd(count)}
+        >
           Agregar
         </button>
       </div>

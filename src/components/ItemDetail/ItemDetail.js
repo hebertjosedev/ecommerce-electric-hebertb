@@ -5,14 +5,19 @@ import "./ItemDetail.css";
 import { useParams } from "react-router-dom";
 import ItemCount from "../ItemCount/ItemCount";
 import { Link } from "react-router-dom";
+import { useCartContext } from "../../context/CartContext";
 
 const ItemDetail = ({ productos }) => {
-  const handleAdd = (cantidad) => {
-    console.log(cantidad);
-    setClick(true);
-  };
+  const { cartList, agregarCarrito } = useCartContext();
   const [click, setClick] = useState(false);
   const { nombre } = useParams();
+
+  const handleAdd = (item, count) => {
+    setClick(true);
+    agregarCarrito(item, count);
+    console.log(item);
+  };
+
   return (
     <>
       {productos.map((producto) =>
