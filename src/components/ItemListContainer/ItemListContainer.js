@@ -7,13 +7,12 @@ import "./ItemListContainer.css";
 function ItemListContainer() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const { producto } = useParams();
 
   useEffect(() => {
     if (producto) {
       PeticionDeProductos.then((res) => {
-        setProducts(res.filter((prod) => prod.producto === producto)); //aca nos devuelve un array del stock de productos
+        setProducts(res.filter((item) => item.producto === producto)); //aca nos devuelve un array del stock de productos
       })
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));

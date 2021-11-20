@@ -9,12 +9,22 @@ export const useCartContext = () => {
 const CartContextProvider = ({ children }) => {
   const [cartList, setCartList] = useState([]);
 
-  const agregarCarrito = (item, prod) => {
-    setCartList([...item, { item: prod }]);
-    // setCartList([...cartList, item]);
+  const agregarCarrito = (item) => {
+    if (productoEnCarrito(item)) {
+      let nuevoCarrito = cartList;
+      nuevoCarrito.forEach((cartItem) => {
+        if (cartItem.id === item.id) {
+          cartItem.cantidad += cartItem.cantidad;
+          return cartItem;
+        }
+      });
+      setCartList(nuevoCarrito);
+    } else {
+      setCartList([...cartList, item]);
+    }
   };
 
-  const quitarProducto = (id) => {
+  const removerProducto = (id) => {
     setCartList(cartList.filter((item) => item.id !== id));
   };
 
@@ -31,6 +41,8 @@ const CartContextProvider = ({ children }) => {
       value={{
         cartList,
         agregarCarrito,
+        removerProducto,
+        limpiarCarrito,
       }}
     >
       {children}
