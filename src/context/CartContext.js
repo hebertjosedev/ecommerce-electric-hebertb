@@ -8,6 +8,7 @@ export const useCartContext = () => {
 
 const CartContextProvider = ({ children }) => {
   const [cartList, setCartList] = useState([]);
+  const [productosCarrito, setProductosCarrito] = useState(false);
 
   const agregarCarrito = (item) => {
     if (productoEnCarrito(item)) {
@@ -19,8 +20,10 @@ const CartContextProvider = ({ children }) => {
         }
       });
       setCartList(nuevoCarrito);
+      setProductosCarrito(true);
     } else {
       setCartList([...cartList, item]);
+      setProductosCarrito(true);
     }
   };
 
@@ -30,19 +33,41 @@ const CartContextProvider = ({ children }) => {
 
   const limpiarCarrito = () => {
     setCartList([]);
+    setProductosCarrito(false);
   };
 
   const productoEnCarrito = (item) => {
     return cartList.some((cartItem) => cartItem.id === item.id);
   };
 
+  const sumaProductos = () => {
+    let cantidadProducto = [];
+    let suma = 0;
+    cartList.forEach((element) => {
+      cantidadProducto.push(element.cantidad);
+    });
+    cantidadProducto.forEach((cantidad) => {
+      suma += cantidad;
+    });
+    return suma;
+  };
+
+  const formatoPesoChileno = (numero) => {
+    return new Intl.NumberFormat("es-CL").format(numero);
+  };
+
   return (
     <CartContext.Provider
       value={{
         cartList,
+        productosCarrito,
+        formatoPesoChileno,
+        setProductosCarrito,
         agregarCarrito,
+        productoEnCarrito,
         removerProducto,
         limpiarCarrito,
+        sumaProductos,
       }}
     >
       {children}

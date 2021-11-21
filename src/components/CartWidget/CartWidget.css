@@ -9,3 +9,21 @@
   transform: rotate(-15deg);
   border-bottom: 1px solid #ffffff;
 }
+
+.visible span {
+  color: white;
+  margin-left: 5px;
+  background-color: rgb(0, 119, 255);
+  border-radius: 15px;
+  padding: 7px;
+  font-size: 20px;
+  border-bottom: none;
+}
+
+.visible {
+  display: inline-block;
+}
+
+.invisible {
+  display: none;
+}

@@ -29,6 +29,10 @@
   margin-bottom: 10px;
 }
 
+.boton-comprar .atras {
+  margin-right: 50px;
+}
+
 @media (max-width: 576px) {
   .contenedor-imagen {
     height: auto;
