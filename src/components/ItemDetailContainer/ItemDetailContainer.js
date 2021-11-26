@@ -11,12 +11,16 @@ const ItemDetailContainer = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    PeticionDeProductos.then((res) => {
-      setProducto(res.filter((item) => item.id === parseInt(id))); //aca nos devuelve un array del stock de productos
-    })
+    const dbConsultas = PeticionDeProductos();
+    dbConsultas //este es para traer solo un producto pro su id
+      .collection("items")
+      .doc(id)
+      .get() //traer uno por el id
+      .then((res) => setProducto([{ id: res.id, ...res.data() }]))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, [id]);
+
   return (
     <>
       {loading ? (

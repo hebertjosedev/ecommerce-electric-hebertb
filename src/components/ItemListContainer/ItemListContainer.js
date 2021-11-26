@@ -10,20 +10,30 @@ function ItemListContainer() {
   const { producto } = useParams();
 
   useEffect(() => {
+    const dbConsultas = PeticionDeProductos(); // conexion con firestore
+
     if (producto) {
-      PeticionDeProductos.then((res) => {
-        setProducts(res.filter((item) => item.producto === producto)); //aca nos devuelve un array del stock de productos
-      })
+      dbConsultas
+        .collection("items")
+        .where("producto", "==", `${producto}`)
+        .get()
+        .then((data) =>
+          setProducts(data.docs.map((pro) => ({ id: pro.id, ...pro.data() })))
+        ) //traer solo los productos por categoria
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
     } else {
-      PeticionDeProductos.then((res) => {
-        setProducts(res); //aca nos devuelve un array del stock de productos
-      })
+      dbConsultas
+        .collection("items")
+        .get()
+        .then((data) =>
+          setProducts(data.docs.map((pro) => ({ id: pro.id, ...pro.data() })))
+        ) //traer todos los productos
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
     }
   }, [producto]);
+
   return (
     <div>
       {loading ? (
