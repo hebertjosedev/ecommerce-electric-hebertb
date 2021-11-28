@@ -122,3 +122,66 @@
   font-size: 25px;
   margin-right: 40px;
 }
+
+/*Formulario orden*/
+
+.contenedor-padre-formulario {
+  display: flex;
+  justify-content: center;
+}
+
+.contenedor-formulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  align-items: center;
+  padding: 20px;
+}
+
+.contenedor-formulario h2 {
+  color: rgb(0, 119, 255);
+}
+
+.contenedor-formulario .formulario {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.formulario label {
+  font-size: 20px;
+  margin: 10px 0 10px 0;
+}
+
+.formulario input {
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 0;
+  border-bottom: 1px solid black;
+}
+
+.formulario button {
+  margin-top: 20px;
+  width: 200px;
+  padding: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: rgb(0, 119, 255);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.formulario button:hover {
+  background-color: rgb(2, 106, 224);
+}
+
+.contenedor-boton-orden {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

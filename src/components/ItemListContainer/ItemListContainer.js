@@ -12,6 +12,9 @@ function ItemListContainer() {
   useEffect(() => {
     const dbConsultas = PeticionDeProductos(); // conexion con firestore
 
+    // Esta repeticion de codigo hay que cambiarla por un ternario, esta
+    // el ejemplo en el primero after del viernes 26/11
+
     if (producto) {
       dbConsultas
         .collection("items")

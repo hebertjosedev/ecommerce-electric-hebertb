@@ -1,0 +1,47 @@
+.contenedor-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000ab;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+}
+
+.contenedor-modal--descripcion {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 450px;
+  width: 450px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: white;
+  color: #2c2b2be3;
+  border: 2px solid red;
+  border-radius: 5px;
+}
+
+.contenedor-modal--descripcion .fa-check-square {
+  color: green;
+}
+
+.contenedor-modal--descripcion .fa-times {
+  font-size: 50px;
+  color: rgba(248, 50, 50, 0.986);
+  position: absolute;
+  top: 7px;
+  right: 14px;
+}
+
+.contenedor-modal--descripcion .fa-times:hover {
+  color: red;
+}
+
+.contenedor-modal--descripcion span {
+  color: gray;
+}

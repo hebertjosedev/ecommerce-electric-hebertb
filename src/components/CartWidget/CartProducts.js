@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
 import "./CartProducts.css";
+import firebase from "firebase";
+import "firebase/firestore";
+import { PeticionDeProductos } from "../services/peticionDeProductos";
+import Modal from "../Modal/Modal";
 
 const CartProducts = () => {
   const {
@@ -15,6 +19,8 @@ const CartProducts = () => {
     setProductosCarrito(false);
   }
 
+  //Cambiar el forEach por un .reduce
+
   const sumatoriaDelTotal = () => {
     let cantidadTotalPagar = [];
     let totalPagar = 0;
@@ -27,6 +33,42 @@ const CartProducts = () => {
     });
 
     return formatoPesoChileno(totalPagar);
+  };
+
+  const [nombre, setNombre] = useState();
+  const [email, setEmail] = useState();
+  const [telefono, setTelefono] = useState();
+  const [idOrden, setIdOrden] = useState();
+  const [showModal, setShowModal] = useState(false);
+
+  const generarOrden = (e) => {
+    e.preventDefault();
+
+    const cliente = { nombre, email, telefono };
+
+    const orden = {};
+
+    orden.date = firebase.firestore.Timestamp.fromDate(new Date());
+    orden.buyer = { cliente };
+    orden.total = sumatoriaDelTotal();
+
+    orden.items = cartList.map((productos) => {
+      const id = productos.id;
+      const nombre = productos.nombre;
+      const precio = productos.precio * productos.cantidad;
+      const cantidad = productos.cantidad;
+
+      return { id, nombre, precio, cantidad };
+    });
+
+    const dbQuery = PeticionDeProductos();
+    dbQuery
+      .collection("ordenes")
+      .add(orden)
+      .then((res) => setIdOrden(res.id))
+      .catch((err) => console.log(err));
+
+    setShowModal(true);
   };
 
   return (
@@ -51,6 +93,7 @@ const CartProducts = () => {
                 {"<~"} Seguir comprando
               </button>
             </Link>
+
             <button onClick={() => limpiarCarrito()}>Vaciar carrito</button>
           </div>
           {cartList.map((prod) => (
@@ -83,7 +126,48 @@ const CartProducts = () => {
             </div>
           ))}
           <p className="total">Total: {sumatoriaDelTotal()} </p>
+          <div className="contenedor-padre-formulario">
+            <div className="contenedor-formulario">
+              <h2>Necesitamos los siguientes datos:</h2>
+              <form className="formulario">
+                <label for="nombre">Nombre</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  onChange={(e) => setNombre(e.target.value)}
+                />
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <label for="telefono">Telefono</label>
+                <input
+                  type="text"
+                  id="telefono"
+                  onChange={(e) => setTelefono(e.target.value)}
+                />
+                <div className="contenedor-boton-orden">
+                  <button onClick={generarOrden}>Generar orden</button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
+      )}
+
+      {showModal === true ? (
+        <Modal
+          nombre={nombre}
+          email={email}
+          telefono={telefono}
+          idOrden={idOrden}
+          total={sumatoriaDelTotal()}
+          modal={showModal}
+        />
+      ) : (
+        console.log("no funciono")
       )}
     </>
   );

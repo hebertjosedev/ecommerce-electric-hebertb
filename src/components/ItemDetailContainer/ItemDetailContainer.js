@@ -19,7 +19,8 @@ const ItemDetailContainer = () => {
       .then((res) => setProducto([{ id: res.id, ...res.data() }]))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
-  }, [id]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
