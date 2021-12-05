@@ -8,7 +8,7 @@ function CartWidget() {
   return (
     <div>
       <div className="cart visible">
-        <i class="fas fa-shopping-cart"></i>
+        <i className="fas fa-shopping-cart"></i>
         <span className={productosCarrito ? "visible" : "invisible"}>
           {sumaProductos()}
         </span>

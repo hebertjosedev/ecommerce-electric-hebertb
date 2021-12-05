@@ -54,14 +54,24 @@
 
 .contenedor-card {
   display: flex;
+  margin-top: 12px;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
 .contenedor-producto {
-  border: 1px solid red;
+  border: 3px solid white;
   padding: 10px;
   margin-bottom: 30px;
+  box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.nombre-producto,
+.precio-producto,
+.stock-producto {
+  margin-bottom: 5px;
 }
 
 .imagen-producto img {
@@ -69,8 +79,25 @@
   height: 200px;
 }
 
+.contenedor-boton-detalle {
+  display: flex;
+  justify-content: center;
+}
+
 button {
-  padding: 5px;
+  padding: 7px;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(24, 139, 24);
+  color: white;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+button:hover {
+  background-color: rgb(21, 168, 21);
+  color: rgb(255, 255, 255);
 }
 
 /*Estilo para el mensaje de error del formulario de cart*/

@@ -11,12 +11,12 @@ const Modal = ({ nombre, email, telefono, idOrden, total }) => {
         <div className="contenedor-modal--descripcion">
           <div className="modal-titulo">
             <Link to={"/"} onClick={limpiarCarrito}>
-              <i class="fas fa-times"></i>
+              <i className="fas fa-times"></i>
             </Link>
             <h2>
               Orden realizada!{" "}
               <span>
-                <i class="fas fa-check-square"></i>
+                <i className="fas fa-check-square"></i>
               </span>
             </h2>
           </div>

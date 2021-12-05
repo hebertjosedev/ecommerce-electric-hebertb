@@ -28,7 +28,7 @@ const ItemDetail = ({ producto }) => {
       {loading === false ? (
         <div className="loading">
           <h1>
-            <i class="fas fa-spinner"></i>
+            <i className="fas fa-spinner"></i>
           </h1>
         </div>
       ) : (

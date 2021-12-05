@@ -14,7 +14,7 @@ function NavBar() {
       </div>
       <div className="input-busqueda">
         <input type="search" name="search" placeholder="Busqueda" />
-        <i class="fas fa-search"></i>
+        <i className="fas fa-search"></i>
       </div>
 
       <div className="cart-products">

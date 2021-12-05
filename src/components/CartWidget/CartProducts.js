@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
 import "./CartProducts.css";
-import firebase from "firebase";
-import "firebase/firestore";
+// import firebase from "firebase";
+// import "firebase/firestore";
+import firebase from "firebase/app";
+import "firebase/database"; // If using Firebase database
+import "firebase/storage"; // If using Firebase storage
 import { PeticionDeProductos } from "../services/peticionDeProductos";
 import Modal from "../Modal/Modal";
-import { Formik, Form, Field, ErrorMessage, validateYupSchema } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const CartProducts = () => {
   const {
@@ -91,12 +94,12 @@ const CartProducts = () => {
             <button onClick={() => limpiarCarrito()}>Vaciar carrito</button>
           </div>
           {cartList.map((prod) => (
-            <div className="contenedor-items">
-              <ul key={prod.id} className="lista-items">
+            <div className="contenedor-items" key={prod.id}>
+              <ul className="lista-items">
                 <li>
                   <div className="imagen-nombre">
                     <img src={prod.img} alt={prod.nombre} />
-                    <div class="contenedor-caracteristicas">
+                    <div className="contenedor-caracteristicas">
                       {prod.nombre}
                       <p>
                         <span>Color:</span> {prod.color}
@@ -224,7 +227,7 @@ const CartProducts = () => {
         </div>
       )}
 
-      {showModal === true ? (
+      {showModal === true && (
         <Modal
           nombre={nombre}
           email={email}
@@ -233,8 +236,6 @@ const CartProducts = () => {
           total={sumatoriaDelTotal()}
           modal={showModal}
         />
-      ) : (
-        console.log("no funciono")
       )}
     </>
   );
