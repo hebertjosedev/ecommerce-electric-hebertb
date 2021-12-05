@@ -6,6 +6,7 @@ import firebase from "firebase";
 import "firebase/firestore";
 import { PeticionDeProductos } from "../services/peticionDeProductos";
 import Modal from "../Modal/Modal";
+import { Formik, Form, Field, ErrorMessage, validateYupSchema } from "formik";
 
 const CartProducts = () => {
   const {
@@ -19,20 +20,13 @@ const CartProducts = () => {
     setProductosCarrito(false);
   }
 
-  //Cambiar el forEach por un .reduce
-
   const sumatoriaDelTotal = () => {
-    let cantidadTotalPagar = [];
-    let totalPagar = 0;
-    cartList.forEach((subtotal) => {
-      cantidadTotalPagar.push(subtotal.precio * subtotal.cantidad);
-    });
-
-    cantidadTotalPagar.forEach((subtotal) => {
-      totalPagar += subtotal;
-    });
-
-    return formatoPesoChileno(totalPagar);
+    return formatoPesoChileno(
+      cartList.reduce(
+        (acumulador, valor) => acumulador + valor.cantidad * valor.precio,
+        0
+      )
+    );
   };
 
   const [nombre, setNombre] = useState();
@@ -41,9 +35,7 @@ const CartProducts = () => {
   const [idOrden, setIdOrden] = useState();
   const [showModal, setShowModal] = useState(false);
 
-  const generarOrden = (e) => {
-    e.preventDefault();
-
+  const generarOrden = () => {
     const cliente = { nombre, email, telefono };
 
     const orden = {};
@@ -68,7 +60,9 @@ const CartProducts = () => {
       .then((res) => setIdOrden(res.id))
       .catch((err) => console.log(err));
 
-    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(true);
+    }, 1500);
   };
 
   return (
@@ -129,29 +123,102 @@ const CartProducts = () => {
           <div className="contenedor-padre-formulario">
             <div className="contenedor-formulario">
               <h2>Necesitamos los siguientes datos:</h2>
-              <form className="formulario">
-                <label for="nombre">Nombre</label>
-                <input
-                  type="text"
-                  id="nombre"
-                  onChange={(e) => setNombre(e.target.value)}
-                />
-                <label for="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <label for="telefono">Telefono</label>
-                <input
-                  type="text"
-                  id="telefono"
-                  onChange={(e) => setTelefono(e.target.value)}
-                />
-                <div className="contenedor-boton-orden">
-                  <button onClick={generarOrden}>Generar orden</button>
-                </div>
-              </form>
+              <Formik
+                initialValues={{ nombre: "", email: "", telefono: "" }}
+                onSubmit={({ resetForm }) => {
+                  resetForm();
+                }}
+                validate={(valores) => {
+                  let errores = {};
+                  setNombre(valores.nombre);
+                  setEmail(valores.email);
+                  setTelefono(valores.telefono);
+
+                  //validacion de nombre
+
+                  if (!valores.nombre) {
+                    errores.nombre = "Por favor ingresa un nombre";
+                  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombre)) {
+                    errores.nombre =
+                      "El nombre solo puede contener letras y espacios";
+                  }
+
+                  //validacion de correo
+                  if (!valores.email) {
+                    errores.email = "Por favor ingresa un correo electronico";
+                  } else if (
+                    !/^[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.-]+$/.test(
+                      valores.email
+                    )
+                  ) {
+                    errores.email =
+                      "El correo solo puede contener letras, numeros, puntos, guiones";
+                  }
+
+                  //validacion de telefono
+
+                  if (!valores.telefono) {
+                    errores.telefono =
+                      "Por favor ingresa un numero de telefono";
+                  } else if (!/^\d{7,14}$/.test(valores.telefono)) {
+                    errores.telefono =
+                      "Ingresa un numero de telefono valido (solo numeros)";
+                  }
+
+                  return errores;
+                }}
+              >
+                {({ errors }) => (
+                  <Form className="formulario">
+                    <label htmlFor="nombre">Nombre</label>
+                    <Field
+                      type="text"
+                      placeholder="Jose"
+                      id="nombre"
+                      name="nombre"
+                    />
+                    <ErrorMessage
+                      name="nombre"
+                      component={() => (
+                        <div className="input-error">{errors.nombre}</div>
+                      )}
+                    />
+
+                    <label htmlFor="email">Email</label>
+                    <Field
+                      type="email"
+                      placeholder="joseromero@gmail.com"
+                      id="email"
+                      name="email"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component={() => (
+                        <div className="input-error">{errors.email}</div>
+                      )}
+                    />
+
+                    <label htmlFor="telefono">Telefono</label>
+                    <Field
+                      type="text"
+                      placeholder="97154824"
+                      id="telefono"
+                      name="telefono"
+                    />
+                    <ErrorMessage
+                      name="telefono"
+                      component={() => (
+                        <div className="input-error">{errors.telefono}</div>
+                      )}
+                    />
+                    <div className="contenedor-boton-orden">
+                      <button type="submit" onClick={generarOrden}>
+                        Generar orden
+                      </button>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
             </div>
           </div>
         </div>

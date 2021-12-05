@@ -72,3 +72,9 @@
 button {
   padding: 5px;
 }
+
+/*Estilo para el mensaje de error del formulario de cart*/
+
+.input-error {
+  color: red;
+}

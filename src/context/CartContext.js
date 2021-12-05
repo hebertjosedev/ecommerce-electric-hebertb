@@ -40,19 +40,11 @@ const CartContextProvider = ({ children }) => {
     return cartList.some((cartItem) => cartItem.id === item.id);
   };
 
-  //Cambiar la funcion de sumar los productos por un .reduce, esta en el
-  // en el primer after del viernes 26/11. cambiar todos los forEach
-
   const sumaProductos = () => {
-    let cantidadProducto = [];
-    let suma = 0;
-    cartList.forEach((element) => {
-      cantidadProducto.push(element.cantidad);
-    });
-    cantidadProducto.forEach((cantidad) => {
-      suma += cantidad;
-    });
-    return suma;
+    return cartList.reduce(
+      (acumulador, productos) => (acumulador = acumulador + productos.cantidad),
+      0
+    );
   };
 
   const formatoPesoChileno = (numero) => {
